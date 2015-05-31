@@ -4,9 +4,11 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# gem 'sqlite3'
+gem 'pg'
 
 # Use SCSS for stylesheets
+gem 'bootstrap-sass', '~> 3.2.0'
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -43,3 +45,10 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'jquery-ui-rails'
+gem 'devise'
+gem 'select2-rails'
+gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "aws-sdk"
+gem "rmagick", :require => 'RMagick'
