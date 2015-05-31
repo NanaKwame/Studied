@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
+ruby '2.1.0'
+
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -51,4 +53,4 @@ gem 'devise'
 gem 'select2-rails'
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
 gem "aws-sdk"
-gem "rmagick", :require => 'RMagick'
+gem "rmagick", :require => 'rmagick'
