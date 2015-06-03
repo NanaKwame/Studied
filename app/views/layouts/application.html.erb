@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Studied</title>
+  <title>Studiiaid</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body style = "font-family: GandhiSans;">
+  <% if current_user != nil%>
+  <div id = 'navContainer'>
+    <div id = 'navLeft'>
+      <div id='logo'>        
+        <h1 style = 'margin-top: 1px; padding: 5px; font-family: BebasNeueBold; background-color: white; border: 0; border-radius: 5px;'>
+        <%= link_to "Studiiaid", root_path %>
+        </h1>
+      </div>
+    </div>
+
+    <div id = 'navRight'>
+      <div id='profPic' style = "width: 45px; height: 45px; display: inline-block">
+        <%= image_tag current_user.image? ? current_user.image.url(:thumb) : "profPic.png", { class: 'img-circle', style: 'position: absolute; height: inherit;'} %>
+      </div>
+      <h3 id = 'name' class="inlineb"> Hi <%= current_user.firstName %>!</h3>
+
+      <div class = "dropdown inlineb" style="display: inline-block;" id="gear" >
+          <span id = "logOut" class = "glyphicon glyphicon-log-out" data-toggle="dropdown"></span>
+          <ul class="dropdown-menu pull-right" role="menu" > 
+            <li id = "signOut" role="presentation">
+              <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+      </div>
+    </div>
+  </div>
+  <%else%>
+
+  <div id="navbar" class="inlineb" style="height:65px; min-width:1000px; position: absolute">
+    <div id = 'logo'class="inlineb" ><h1 style = 'margin-top: 10px; margin-left: 10px; font-size: 45px; font-family: BebasNeueBold'>Studiiaid</h1></div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), :html => {:class => "login-signin"}) do |f| %>
+
+    <div class="login-signin-email inlineb">
+      <%= f.email_field :email, autofocus: true, :placeholder => "Email", :tabindex => "1" %>
+      <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+      <div class ="login-signin-forgot inlineb white">
+        <%= link_to "Forgot your password?", new_password_path(resource_name), :tabindex => "3" %><br />
+      </div>
+      <% end -%>
+    </div>
+
+      <div class="login-signin-password inlineb">
+        <%= f.password_field :password, autocomplete: "off", :placeholder => "Password", :tabindex => "2" %>
+        <% if devise_mapping.rememberable? -%>
+        <div class="login-signin-remember  white">
+          <%= f.check_box :remember_me, :tabindex => "4" %>
+          <%= f.label :remember_me %>
+        </div>
+      <% end -%>
+      </div>
+      <div class="login-signin-submit inlineb">
+        <%= f.submit "Sign in" %>
+      </div>
+    <% end %>
+  </div>
+<%end%>
+
+
+
+
+
 
 <%= yield %>
 
