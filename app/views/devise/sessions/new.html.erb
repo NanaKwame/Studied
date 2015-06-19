@@ -24,6 +24,10 @@
 
     <div class="signup-cnpwd">
       <%= f.password_field :password_confirmation, autocomplete: "off", :required => true, :placeholder => "Confirm Password" %></div>
+    <div class="signup-admin" >
+      <%= f.check_box :admin %>
+      <%= f.label "Admin?" %>
+    </div>  
 
     <div class="signup-but"><%= f.submit "Sign up" %></div>
   <% end %>

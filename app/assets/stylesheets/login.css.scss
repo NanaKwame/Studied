@@ -137,7 +137,7 @@
 	.login-signup{
 		width: 400px;
 		vertical-align: top;
-		height: 300px;
+		height: 320px;
 		text-align: center;
 		h1{
 			color: white;
@@ -177,6 +177,12 @@
 		}
 		.signup-but{
 			color: #006dcc;
+		}
+		.signup-admin{
+			color: white;
+			input{
+				height: 11px;
+			}
 		}
 	}
 }

@@ -1,0 +1,30 @@
+<h1>Listing trackers</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Book ID</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @trackers.each do |tracker| %>
+      <tr>
+        <td><%= tracker.user_id%></td>
+        <td><%= tracker.book_id%></td>
+        <td><%= tracker.start_time%></td>
+        <td><%= tracker.end_time%></td>
+        <td><%= link_to 'Show', tracker %></td>
+        <td><%= link_to 'Edit', edit_tracker_path(tracker) %></td>
+        <td><%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tracker', new_tracker_path %>

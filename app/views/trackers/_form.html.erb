@@ -1,0 +1,29 @@
+<%= form_for(@tracker) do |f| %>
+  <% if @tracker.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tracker.errors.count, "error") %> prohibited this tracker from being saved:</h2>
+
+      <ul>
+      <% @tracker.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div><%= f.label :user_id %><br />
+  <%= f.text_field :user_id %></div>
+
+  <div><%= f.label :book_id %><br />
+  <%= f.text_field :book_id %></div>
+
+  <div><%= f.label :start_time %><br />
+  <%= f.text_field :start_time %></div>
+
+  <div><%= f.label :end_time %><br />
+  <%= f.text_field :end_time %></div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
