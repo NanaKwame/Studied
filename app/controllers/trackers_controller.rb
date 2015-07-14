@@ -1,6 +1,6 @@
 class TrackersController < ApplicationController
   before_action :set_tracker, only: [:show, :edit, :update, :destroy]
-
+  before_filter :deny_non_admin
   respond_to :html
 
   def index

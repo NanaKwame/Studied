@@ -24,7 +24,7 @@
 }
 #navRight{
 	float: right;
-	width: 250px;
+	width: 300px;
 	margin-top: 3px;
 }
 
@@ -187,3 +187,14 @@
 	}
 }
 
+.page-notice{
+	font-size: 20px;
+	background-color: #7fffd4;
+	height: 30px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	width: 400px;
+	border-radius:10px;
+	padding: 5px;
+}

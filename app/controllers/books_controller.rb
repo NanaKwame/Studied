@@ -1,6 +1,5 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-
   respond_to :html
 
   def index
@@ -42,6 +41,6 @@ class BooksController < ApplicationController
     end
 
     def book_params
-      params[:book].permit(:title, :ISBN, :publisher, :description)
+      params[:book].permit(:title, :ISBN, :publisher, :description, :image)
     end
 end

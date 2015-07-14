@@ -16,7 +16,18 @@ Studied::Application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#dashboard'
+  root 'home#homepage'
+
+  resources :home do
+      collection do
+        get 'homepage'
+        get 'catalogue'
+        get 'myLibrary'
+        get 'manageOrder'
+        get 'forums'
+        get 'search'
+      end
+    end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

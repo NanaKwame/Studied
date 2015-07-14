@@ -1,6 +1,6 @@
 class LibrariesController < ApplicationController
   before_action :set_library, only: [:show, :edit, :update, :destroy]
-
+  before_filter :deny_non_admin
   respond_to :html
 
   def index

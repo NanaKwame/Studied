@@ -6,8 +6,15 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
-  protected
 
+  def deny_non_admin
+    if current_user and current_user.admin != true
+      redirect_to root_path, notice: "You were dienied access"
+    end
+  end
+
+
+  protected
   def configure_devise_permitted_parameters
     registration_params = [:firstName, :lastName, :image, :description, :email, :password, :password_confirmation, :admin]
 

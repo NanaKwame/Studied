@@ -7,6 +7,7 @@
       <th>ISBN</th>
       <th>Publisher</th>
       <th>Description</th>
+      <th>Image</th>
     </tr>
   </thead>
 
@@ -17,9 +18,10 @@
         <td><%= book.ISBN%></td>
         <td><%= book.publisher%></td>
         <td><%= book.description%></td>
-        <td><%= link_to 'Show', book %></td>
-        <td><%= link_to 'Edit', edit_book_path(book) %></td>
-        <td><%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><img src="<%= book.image.url%>" alt="Smiley face" height="42" ></td>
+        <td><%= link_to 'Show', book %>
+        <%= link_to 'Edit', edit_book_path(book) %>
+        <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
