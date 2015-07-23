@@ -1,1 +1,44 @@
-<h1> Catalogue</h1>
+<h1 class="my-page-header"> Catalogue</h1>
+
+<div class="catalogue-container">
+	<% if !Book.all.blank? %>
+	  <% for book in Book.all %>
+	    <div class="catalogue-ele inlineb">
+			<img class="ele-image inlineb" src="<%=book.image%>">
+			<div class="catalogue-ele-details inlineb">
+				<div class="ele-title">
+					<%=book.title%>
+				</div>
+				<div class="ele-authors">
+					Author(s):
+					<%for auth in book.authors%>
+						<div class="ele-author inlineb">
+							<%=auth.firstName%>
+							<%=auth.lastName%>
+						</div>
+					<%end%>
+				</div>
+				<div class="ele-publishers">
+					Publisher: 
+					<%=book.publisher%>
+				</div>
+				<div class="ele-tags">
+					Tags:
+					<%for tag in book.tags%>
+						<div class="ele-tag inlineb">
+							<%=tag.name%>
+						</div>
+					<%end%>
+				</div>
+				<a class="ele-more" href="<%= book_path(book)%>">See more...</a>
+			</div>
+		</div>
+	  <% end %>
+	<% else %>
+	  <h2>Sorry, no Books available to show.</h2>
+	<% end %>
+	
+	
+	
+
+</div>
