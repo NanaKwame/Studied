@@ -1,1 +1,16 @@
 <h1>myLibrary</h1>
+<div class="libraryfilter">
+	Show: 
+	<input id="readfilter"  type="checkbox" value="read">Read Books
+	<input id="unreadfilter"  type="checkbox" value="unread">Unread Books
+</div>
+<div class="catalogue-container">
+	<% if !current_user.libraries.blank? %>
+	  <% for lib in current_user.libraries.all %>
+	  	<%book = lib.book%>
+	    <%= render partial: "partials/catalogue_element", locals: {book: book, lib: lib, addclass: "library-ele"}%>
+	  <% end %>
+	<% else %>
+	  <h2>Sorry, no Books available to show.</h2>
+	<% end %>
+</div>

@@ -23,7 +23,7 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
     @author.save
-    respond_with(@author)
+    redirect_to :back
   end
 
   def update

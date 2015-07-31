@@ -12,8 +12,13 @@ class HomeController < ApplicationController
 	end
 
 	def forums
+		@forums = Forum.all
 	end
 
 	def search
+	end
+
+	def adminPage
+
 	end
 end

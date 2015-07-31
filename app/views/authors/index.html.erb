@@ -1,5 +1,10 @@
 <h1>Listing authors</h1>
-
+<%= form_for Author.new, :html => {class: "addAuthorForm inlineb"} do |f| %>
+  <%= f.text_field(:firstName, :placeholder => "First Name") %>
+  <%= f.text_field(:lastName, :placeholder => "Last Name") %>
+  <%= f.text_field(:book_id, :placeholder => "Book ID")%>
+  <%= f.submit("Add") %>
+<% end %>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -15,9 +20,8 @@
         <td><%= author.firstName%></td>
         <td><%= author.lastName%></td>
         <td><%= author.book_id%></td>
-        <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_author_path(author) %>
+        <%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,4 +29,3 @@
 
 <br>
 
-<%= link_to 'New Author', new_author_path %>

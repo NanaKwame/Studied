@@ -1,0 +1,25 @@
+<h1>Listing referencedbooks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @referencedbooks.each do |referencedbook| %>
+      <tr>
+        <td><%= link_to 'Show', referencedbook %></td>
+        <td><%= link_to 'Edit', edit_referencedbook_path(referencedbook) %></td>
+        <td><%= link_to 'Destroy', referencedbook, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Referencedbook', new_referencedbook_path %>

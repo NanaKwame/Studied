@@ -1,1 +1,39 @@
 <h1>Forums</h1>
+
+<%= form_for(Forum.new, :html => {:class => "indexCreateForm indexCreateFormSpecial"}) do |f| %>
+  <div class="actions">
+    <div class="inlineb">
+    <%= f.text_field :title, :placeholder => "Title" %></div>
+
+    <div class="inlineb">
+    <%= f.text_area :description, :placeholder => "Description" %></div>
+
+    <%= f.hidden_field(:user_id, :value => current_user.id) %>
+  
+    <%= f.submit "Create Forum" %>
+  </div>
+<% end %>
+
+
+<% @forums.each do |forum| %>
+  
+  <div class="inlineb forumele" >
+    <div>
+      <h4><%= forum.title%></h4> 
+      <div>created by <%=forum.user.fullName%> on <%=forum.created_at.to_s(:long)%></div>
+    </div>
+    <div>Description: <%= forum.description%></div>
+    <div> <%= forum.likes.count%> likes</div>
+  <div>
+  </div class="inlineb" >
+  <button class="btn"><%= link_to 'Enter Forum', forum_path(forum) %></button>
+    <% mylike = forum.likedby( current_user.id )%>
+    <% if mylike.size == 0%>
+      <button class="btn like" data-userid="<%=current_user.id%>" data-likedid="<%=forum.id%>" data-likedtype="Forum" data-action="like">Like</button>
+    <%else%>
+      <button class="btn deletejs" data-controller="likes" data-id="<%=mylike[0].id%>">Unlike</button>
+    <%end%>
+  </div>
+  
+<% end %>
+  

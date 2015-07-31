@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_devise_permitted_parameters, if: :devise_controller?
 
-
+  
   def deny_non_admin
     if current_user and current_user.admin != true
-      redirect_to root_path, notice: "You were dienied access"
+      redirect_to root_path, notice: "You were denied access"
     end
   end
 

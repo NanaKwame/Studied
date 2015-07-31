@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710000615) do
+ActiveRecord::Schema.define(version: 20150730134321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,10 +37,34 @@ ActiveRecord::Schema.define(version: 20150710000615) do
     t.datetime "image_updated_at"
   end
 
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "forum_id"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forums", force: true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "libraries", force: true do |t|
     t.integer  "user_id"
     t.integer  "book_id"
-    t.text     "description"
+    t.text     "description", default: "unread"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "liked_id"
+    t.string   "liked_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -56,6 +80,14 @@ ActiveRecord::Schema.define(version: 20150710000615) do
     t.integer  "user_id"
     t.integer  "book_id"
     t.datetime "time_used"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "referencedbooks", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "book_id"
+    t.integer  "forum_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

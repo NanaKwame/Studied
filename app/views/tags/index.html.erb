@@ -1,5 +1,8 @@
 <h1>Listing tags</h1>
-
+<%= form_for Tag.new, :html => {class: "addAuthorForm inlineb"} do |f| %>
+  <%= f.text_field(:name, :placeholder => "Name")%>
+  <%= f.submit("Create") %>
+<% end %>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -11,9 +14,8 @@
     <% @tags.each do |tag| %>
       <tr>
         <td><%= tag.name%></td>
-        <td><%= link_to 'Show', tag %></td>
-        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
-        <td><%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_tag_path(tag) %>
+        <%= link_to 'Destroy', tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -21,4 +23,3 @@
 
 <br>
 
-<%= link_to 'New Tag', new_tag_path %>

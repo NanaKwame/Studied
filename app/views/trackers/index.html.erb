@@ -7,19 +7,19 @@
       <th>Book ID</th>
       <th>Start Time</th>
       <th>End Time</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @trackers.each do |tracker| %>
       <tr>
-        <td><%= tracker.user_id%></td>
-        <td><%= tracker.book_id%></td>
-        <td><%= tracker.start_time%></td>
-        <td><%= tracker.end_time%></td>
-        <td><%= link_to 'Show', tracker %></td>
-        <td><%= link_to 'Edit', edit_tracker_path(tracker) %></td>
-        <td><%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= tracker.user_id%> - <%=tracker.user.fullName%></td>
+        <td><%= tracker.book_id%> - <%=tracker.book.title%> (ISBN: <%=tracker.book.ISBN%>)</td>
+        <td><%= tracker.start_time.to_s(:long)%></td>
+        <td><%= tracker.end_time.to_s(:long)%></td>
+        <td><%= link_to 'Edit', edit_tracker_path(tracker) %>
+        <%= link_to 'Destroy', tracker, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

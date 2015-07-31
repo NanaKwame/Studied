@@ -1,5 +1,19 @@
 Studied::Application.routes.draw do
-  resources :tags
+  resources :referencedbooks
+
+  resources :comments
+
+  resources :likes
+
+  resources :forums
+
+  resources :tags do
+    collection do
+      post 'addTag'
+      post 'removeTagLink'
+    end
+
+  end
 
   resources :authors
 
@@ -9,14 +23,14 @@ Studied::Application.routes.draw do
 
   resources :libraries
 
-  resources :books
+  resources :books 
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#homepage'
+  root 'home#myLibrary'
 
   resources :home do
       collection do
@@ -26,6 +40,7 @@ Studied::Application.routes.draw do
         get 'manageOrder'
         get 'forums'
         get 'search'
+        get 'adminPage'
       end
     end
 

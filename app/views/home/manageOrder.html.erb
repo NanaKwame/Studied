@@ -1,1 +1,35 @@
-<h1> Managae Order </h1>
+<h1> Manage Order </h1>
+
+<table class="table  table-bordered">
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>Time Used (hours)</th>
+      <th>Times</th>
+      <th>Cost</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% current_user.orders.each do |order| %>
+      <tr>
+        <td><%= order.book_id%> - <%=order.book.title%> (ISBN: <%=order.book.ISBN%>)</td>
+        <td><%= order.calculated_timeused %></td>
+        <td>
+          <ul class="libraryUsers">
+            <%for tracker in order.trackers%>
+              <li>
+                from <%= tracker.start_time.to_s(:long)%> to <%= tracker.end_time.to_s(:long)%>
+              </li>
+            <%end%>
+          </ul>
+        </td>
+        <td><%= order.cost %></td>
+        <td>Closed</td>
+        <td><button>Pay</button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,8 @@
 .my-page-header{
 	margin-left: 10px;
 }
+
+
 .login-all{
 	width: 100%;
 	height: 100%;
@@ -16,6 +18,10 @@
 #logo{
 	color: #f2f2f2;
 }
+.website-logo{
+	width: 130px;
+}
+
 //navbar
 #navContainer{
 	height:50px; 
@@ -27,13 +33,26 @@
 }
 #navRight{
 	float: right;
-	width: 300px;
+	width: 340px;
 	margin-top: 3px;
 }
 
 #navbar h1{
 	display: inline-block;
 }
+
+.nav-headers{
+	width: 930px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.nav-header{
+	width: 220px; 
+	margin: 5px;
+	font-size: 25px;
+	text-align: center;
+}
+
 #name{
 	vertical-align: top;
 	margin-top: 10px;
@@ -191,6 +210,8 @@
 }
 
 .page-notice{
+	position: absolute;
+	left: 30%;
 	font-size: 20px;
 	background-color: #7fffd4;
 	height: 30px;
@@ -205,10 +226,30 @@
 .catalogue-container{
 
 }
+
+.ele-tag{
+	border: 1px black solid;
+	background-color: #92f97b;
+	border-radius: 5px;
+	margin: 2px;
+	padding: 1px;
+}
+.ele-image-container{
+	width: 155px;
+	position: relative;
+}
+.ele-image-container span{
+	font-size: 23px;
+	font-weight: bold;
+	color: #c1073f;
+	position: absolute;
+	left: 19px;
+	bottom: 17px;
+}
 .catalogue-ele{
 	width: 400px;
 	border-radius: 10px;
-	border: 1px solid black;
+	border: 1px solid gray;
 	vertical-align: top;
 	margin: 10px;
 	.ele-image{
@@ -238,9 +279,6 @@
 		}
 		.ele-tags{
 			margin-bottom: 10px;
-			.ele-tag{
-
-			}
 		}
 		.ele-more{
 			margin-bottom: 10px;

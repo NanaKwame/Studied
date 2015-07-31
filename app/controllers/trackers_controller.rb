@@ -21,9 +21,14 @@ class TrackersController < ApplicationController
   end
 
   def create
+    prev_order = Tracker.where("book_id = '"+tracker_params[:book_id]+"' and user_id= '"+tracker_params[:user_id]+"'")
+    if prev_order.length == 0
+      order = Order.new(:user_id => tracker_params[:user_id] , :book_id => tracker_params[:book_id])
+      order.save
+    end
     @tracker = Tracker.new(tracker_params)
     @tracker.save
-    respond_with(@tracker)
+    redirect_to action: "index"
   end
 
   def update

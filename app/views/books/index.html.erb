@@ -4,11 +4,13 @@
   <thead>
     <tr>
       <th>Title</th>
+      <th>Author(s)</th>
       <th>ISBN</th>
       <th>Publisher</th>
       <th>Description</th>
       <th>Image</th>
       <th>Tags</th>
+      <th>Users</th>
     </tr>
   </thead>
 
@@ -16,12 +18,52 @@
     <% @books.each do |book| %>
       <tr>
         <td><%= book.title%></td>
+        <td>
+          <%for auth in book.authors%>
+            <div class="ele-author inlineb">
+              <%=auth.fullName%>
+            </div>
+            <br>
+          <%end%>
+          <%= form_for Author.new, :html => {class: "addAuthorForm inlineb"} do |f| %>
+            <%= f.hidden_field(:book_id, :value => book.id) %>
+            <%= f.text_field(:firstName, :placeholder => "First Name") %>
+            <%= f.text_field(:lastName, :placeholder => "Last Name")%>
+            <%= f.submit("Add") %>
+          <% end %>
+        </td>
         <td><%= book.ISBN%></td>
         <td><%= book.publisher%></td>
         <td><%= book.description%></td>
         <td><img src="<%= book.image.url%>" alt="Smiley face" height="42" ></td>
-        <td></td>
-        <td><%= link_to 'Show', book %>
+        <td>
+          <%for tag_link in book.tag_links%>
+            <div class="ele-tag inlineb">
+              <%=tag_link.tag.name%>
+              <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "untag", :data => {:controller => "tagLink", :id => tag_link.id})%>
+            </div>
+          <%end%>
+          <%= form_tag("/tags/addTag", method: "post") do %>
+            <%= hidden_field_tag(:book_id, book.id) %>
+            <%= select("post", "tag_id", Tag.all.collect {|p| [ p.name, p.id ] }, { include_blank: false }) %>
+            <%= submit_tag("Add Tag") %>
+          <% end %>
+          
+        </td>
+        <td>
+          <div class="libraryUsers">
+            <%for lib in book.libraries %>
+              <%= lib.user.fullName%> <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "remove from library", :data => {:controller => "libraries", :id => lib.id})%>
+              <br>
+            <%end%>
+          </div>
+          <%= form_for Library.new do |f|%>
+            <%= f.hidden_field(:book_id, :value => book.id) %>
+            <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %>
+            <%= f.submit("Add to Library") %>
+          <% end %>
+        </td>
+        <td>
         <%= link_to 'Edit', edit_book_path(book) %>
         <%= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

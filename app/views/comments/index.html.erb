@@ -1,0 +1,63 @@
+<h1>Listing comments</h1>
+
+<%= form_for Comment.new, :html => {class: "indexCreateForm"} do |f| %>
+  <div class="actions">
+    <div class="inlineb"><%= f.label :user_id %><br />
+    <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+
+    <div class="inlineb"><%= f.label :forum_id %><br />
+    <%= f.select("forum_id", Forum.all.collect {|p| [ p.title+" by "+p.user.fullName, p.id ] }, { include_blank: false }) %></div>
+
+    <div class="inlineb"><%= f.label :content %><br />
+    <%= f.text_area :content %></div>
+
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<table class="table  table-bordered">
+  <thead>
+    <tr>
+      <th>Owner</th>
+      <th>Forum</th>
+      <th>Text</th>
+      <th>Likes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr>
+        <td><%= comment.user.fullName%></td>
+        <td><%= comment.forum.title+" by "+comment.forum.user.fullName%></td>
+        <td><%= comment.content%></td>
+        <td>
+          <div class="libraryUsers">
+            <% for like in comment.likes%>
+              <div>
+                <%= like.user.fullName%>
+                <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "unlike", :data => {:controller => "likes", :id => like.id})%>
+              </div>
+            <% end %>
+          </div>
+          <%= form_for comment.likes.new, :html => {class: "addAuthorForm inlineb"} do |f| %>
+            <%= f.hidden_field(:user_id, :value => current_user.id) %>
+            <%= f.hidden_field(:liked_id, :value => comment.id) %>
+            <%= f.hidden_field(:liked_type, :value => "Comment") %>
+            <div class="inlineb"><%= f.label :user_id %>:
+            <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+            <%= f.submit("Add") %>
+          <% end %>
+        </td>
+        <td><%= link_to 'Show', comment %>
+        <%= link_to 'Edit', edit_comment_path(comment) %>
+        <%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Comment', new_comment_path %>

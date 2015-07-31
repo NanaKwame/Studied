@@ -1,0 +1,60 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Forum: <%= @forum.title%></h1>
+<div>created by <%=@forum.user.fullName%> on <%= @forum.created_at.to_s(:long)%></div>
+<div>Description: <div class="inlineb"><%= simple_format(@forum.description)%></div></div>
+<div> <%= @forum.likes.count%> Likes</div>
+<% mylike = @forum.likedby( current_user.id )%>
+<% if mylike.size == 0%>
+  <button class="btn like" data-userid="<%=current_user.id%>" data-likedid="<%=@forum.id%>" data-likedtype="Forum" data-action="like">Like</button>
+<%else%>
+  <button class="btn deletejs" data-controller="likes" data-id="<%=mylike[0].id%>">Unlike</button>
+<%end%>
+<%if @forum.user.id == current_user.id%>
+	<%= link_to 'Edit', edit_forum_path(@forum) %> |
+	<%= link_to 'Back', forums_path %>
+<%end%>
+
+<br>
+<br>
+
+<table class="table  table-bordered">
+  <thead>
+    <tr>
+      <th>Comments</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  	<%for comment in @forum.comments%>
+  	<tr>
+  		<td>
+  			<%= comment.content%>
+        <div> <%= comment.likes.count%> Likes</div>
+        <% mylike = comment.likedby( current_user.id )%>
+        <% if mylike.size == 0%>
+          <button class="btn like" data-userid="<%=current_user.id%>" data-likedid="<%=comment.id%>" data-likedtype="Comment" data-action="like">Like</button>
+        <%else%>
+          <button class="btn deletejs" data-controller="likes" data-id="<%=mylike[0].id%>">Unlike</button>
+        <%end%>
+  			<br>
+  			Created by <%=comment.user.fullName %> on <%=comment.created_at.to_s(:long) %>
+  		</td>
+
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<%= form_for Comment.new, :html => {class: "indexCreateForm"} do |f| %>
+  <div class="actions">
+  	<%= f.hidden_field(:user_id, :value => current_user.id) %>
+
+    <%= f.hidden_field(:forum_id, :value => @forum.id) %>
+
+    <div class="inlineb">
+    <%= f.text_area :content, :placeholder => "Type comment here" %></div>
+
+    <%= f.submit "Comment" %>
+  </div>
+<% end %>

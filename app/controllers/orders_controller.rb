@@ -23,7 +23,7 @@ class OrdersController < ApplicationController
   def create
     @order = Order.new(order_params)
     @order.save
-    respond_with(@order)
+    redirect_to action: "index"
   end
 
   def update

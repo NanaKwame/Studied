@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<div><%= @comment.user.fullName%></div>
+<div><%= @comment.forum.title+" by "+@comment.forum.user.fullName%></div>
+<div><%= @comment.content%></div>
+<div>
+  Likes by:
+  <% for like in @comment.likes%>
+    <div>
+      <%= like.user.fullName%>
+    </div>
+    
+  <% end %>
+
+</div>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>

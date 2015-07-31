@@ -1,0 +1,64 @@
+<h1>Listing forums</h1>
+
+<%= form_for(Forum.new, :html => {:class => "indexCreateForm indexCreateFormSpecial"}) do |f| %>
+  <div class="actions">
+    <div class="inlineb">
+    <%= f.text_field :title, :placeholder => "Title" %></div>
+
+    <div class="inlineb">
+    <%= f.text_area :description, :placeholder => "Description" %></div>
+
+    <div class="inlineb"><%= f.label :user_id %>:
+    <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+  
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<table class="table  table-bordered">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Owner</th>
+      <th>Description</th>
+      <th>Likes</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @forums.each do |forum| %>
+      <tr>
+        <td><%= forum.title%></td>
+        <td><%= forum.user_id%> - <%=forum.user.fullName%></td>
+        <td><%= simple_format(forum.description)%></td>
+        <td>
+          <div class="libraryUsers">
+            <% for like in forum.likes%>
+              <div>
+                <%= like.user.fullName%>
+                <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "unlike", :data => {:controller => "likes", :id => like.id})%>
+              </div>
+            <% end %>
+          </div>
+          <%= form_for forum.likes.new, :html => {class: "addAuthorForm inlineb"} do |f| %>
+            <%= f.hidden_field(:liked_id, :value => forum.id) %>
+            <%= f.hidden_field(:liked_type, :value => "Forum") %>
+            <div class="inlineb"><%= f.label :user_id %>:
+            <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+            <%= f.submit("Add") %>
+          <% end %>
+
+        </td>
+        <td>
+        <%= link_to 'Show', forum_path(forum) %>
+        <%= link_to 'Edit', edit_forum_path(forum) %>
+        <%= link_to 'Destroy', forum, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Forum', new_forum_path %>

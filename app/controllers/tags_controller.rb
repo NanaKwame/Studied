@@ -23,7 +23,7 @@ class TagsController < ApplicationController
   def create
     @tag = Tag.new(tag_params)
     @tag.save
-    respond_with(@tag)
+    redirect_to :back
   end
 
   def update
@@ -34,6 +34,18 @@ class TagsController < ApplicationController
   def destroy
     @tag.destroy
     respond_with(@tag)
+  end
+
+  def addTag
+    taggable = TagLink.new(:tag_id => params[:post][:tag_id] , :book_id => params[:book_id])
+    taggable.save
+    redirect_to :back
+  end
+
+  def removeTagLink
+    taggable = TagLink.find(params[:id])
+    taggable.destroy
+    redirect_to :back
   end
 
   private

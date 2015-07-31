@@ -1,0 +1,33 @@
+<div class="catalogue-ele inlineb <%= addclass%>" data-status = "<%= lib.description%>">
+	<div class="inlineb ele-image-container">
+		<img class="ele-image " src="<%=book.image%>">
+		<span class=""><%= lib.description%></span>
+	</div>
+	<div class="catalogue-ele-details inlineb">
+		<div class="ele-title">
+			<%=book.title%>
+		</div>
+		<div class="ele-authors">
+			Author(s):
+			<%for auth in book.authors%>
+				<div class="ele-author inlineb">
+					<%=auth.firstName%>
+					<%=auth.lastName%>
+				</div>
+			<%end%>
+		</div>
+		<div class="ele-publishers">
+			Publisher: 
+			<%=book.publisher%>
+		</div>
+		<div class="ele-tags">
+			Tags:
+			<%for tag in book.tags%>
+				<div class="ele-tag inlineb">
+					<%=tag.name%>
+				</div>
+			<%end%>
+		</div>
+		<a class="ele-more" href="<%= book_path(book)%>">See more...</a>
+	</div>
+</div>

@@ -23,7 +23,7 @@ class LibrariesController < ApplicationController
   def create
     @library = Library.new(library_params)
     @library.save
-    respond_with(@library)
+    redirect_to :back
   end
 
   def update
