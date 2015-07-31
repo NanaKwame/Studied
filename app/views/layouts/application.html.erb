@@ -44,6 +44,13 @@
       </div>
     </div>
   </div>
+  <div class="nav-headers inlineb">
+
+    <%= link_to "My Home Page", myLibrary_home_index_path, :class => "btn btn-default nav-header"  %>
+    <%= link_to "Search", search_home_index_path, :class => "btn btn-default nav-header"  %>
+    <%= link_to "Forums", forums_home_index_path, :class => "btn btn-default nav-header"  %>
+    <%= link_to "Manage Orders", manageOrder_home_index_path, :class => "btn btn-default nav-header"  %>
+  </div>
   <%else%>
 
   <div id="navbar" class="inlineb" style="height:65px; min-width:1000px; position: absolute">
@@ -74,13 +81,6 @@
     <% end %>
   </div>
 <%end%>
-  <div class="nav-headers inlineb">
-
-    <%= link_to "My Home Page", myLibrary_home_index_path, :class => "btn btn-default nav-header"  %>
-    <%= link_to "Search", search_home_index_path, :class => "btn btn-default nav-header"  %>
-    <%= link_to "Forums", forums_home_index_path, :class => "btn btn-default nav-header"  %>
-    <%= link_to "Manage Orders", manageOrder_home_index_path, :class => "btn btn-default nav-header"  %>
-  </div>
 
 <% if notice%>
 <div class="page-notice">
