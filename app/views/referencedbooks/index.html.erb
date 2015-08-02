@@ -1,20 +1,38 @@
-<h1>Listing referencedbooks</h1>
+<h1>Listing Referenced Books</h1>
 
-<table>
+<%= form_for(Referencedbook.new , :html => {class: "indexCreateForm"}) do |f| %>
+  <div class="actions">
+    <div class="inlineb"><%= f.label :user_id %><br />
+      <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+
+    <div class="inlineb"><%= f.label :book_id %><br />
+    <%= f.select("book_id", Book.all.collect {|p| [ p.title+"- ISBN: "+p.ISBN, p.id ] }, { include_blank: false }) %></div>
+
+    <div class="inlineb"><%= f.label :forum_id %><br />
+    <%= f.select("forum_id", Forum.all.collect {|p| [ p.title+" by "+p.user.fullName, p.id ] }, { include_blank: false }) %></div>
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<table class="table  table-bordered">
   <thead>
     <tr>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>User ID</th>
+      <th>Book ID</th>
+      <th>Forum ID</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
   <tbody>
     <% @referencedbooks.each do |referencedbook| %>
       <tr>
-        <td><%= link_to 'Show', referencedbook %></td>
-        <td><%= link_to 'Edit', edit_referencedbook_path(referencedbook) %></td>
-        <td><%= link_to 'Destroy', referencedbook, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= referencedbook.user_id%> - <%=referencedbook.user.fullName%></td>
+        <td><%= referencedbook.book_id%> - <%=referencedbook.book.title%> (ISBN: <%=referencedbook.book.ISBN%>)</td>
+        <td><%= referencedbook.forum.title%> by <%referencedbook.forum.user.fullName%></td>
+        <td>
+        <%= link_to 'Edit', edit_referencedbook_path(referencedbook) %>
+        <%= link_to 'Destroy', referencedbook, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

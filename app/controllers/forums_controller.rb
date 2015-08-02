@@ -1,6 +1,6 @@
 class ForumsController < ApplicationController
   before_action :set_forum, only: [:show, :edit, :update, :destroy]
-
+  before_filter :deny_non_admin, only: [:index]
   respond_to :html
 
   def index
@@ -23,7 +23,7 @@ class ForumsController < ApplicationController
   def create
     @forum = Forum.new(forum_params)
     @forum.save
-    redirect_to action: "index"
+    redirect_to :back
   end
 
   def update

@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_filter :deny_non_admin, except: [:show, :index]
   respond_to :html
 
   def index
@@ -22,7 +23,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
     @book.save
-    respond_with(@book)
+    redirect_to :back
   end
 
   def update

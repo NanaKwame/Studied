@@ -1,4 +1,6 @@
 class HomeController < ApplicationController
+	before_filter :deny_non_admin, only: [:adminPage]
+
 	def homepage
 	end
 

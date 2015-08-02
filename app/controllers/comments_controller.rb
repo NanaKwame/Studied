@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_filter :deny_non_admin, only: [:index, :show]
   respond_to :html
 
   def index
