@@ -19,7 +19,7 @@
       <tr>
         <td><%= author.firstName%></td>
         <td><%= author.lastName%></td>
-        <td><%= author.book_id%></td>
+        <td><%= author.book_id%> - <%=author.book.title%> (ISBN: <%=author.book.ISBN%>)</td>
         <td><%= link_to 'Edit', edit_author_path(author) %>
         <%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

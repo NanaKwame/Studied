@@ -19,9 +19,10 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Owner</th>
+      <th>Owner ID</th>
       <th>Description</th>
       <th>Likes</th>
+      <th>Referenced Books</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -34,6 +35,9 @@
         <td><%= simple_format(forum.description)%></td>
         <td>
           <div class="libraryUsers">
+            <div>
+              <%= forum.likes.count%> like(s)
+            </div>
             <% for like in forum.likes%>
               <div>
                 <%= like.user.fullName%>
@@ -48,6 +52,30 @@
             <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
             <%= f.submit("Add") %>
           <% end %>
+
+        </td>
+        <td>
+          <div class="libraryUsers">
+            <% for ref in forum.referencedbooks%>
+              <div>
+                <%= ref.book.title%> added by <%= ref.user.fullName%>
+                <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "remove reference", :data => {:controller => "referencedbooks", :id => ref.id})%>
+              </div>
+            <%end%>
+            <br>
+          </div>
+          <%= form_for(Referencedbook.new , :html => {class: "indexCreateForm indexCreateFormSpecial"}) do |f| %>
+            <div class="actions">
+              <%= f.hidden_field(:forum_id, :value => forum.id) %>
+              <div >User: 
+                <%= f.select("user_id", User.all.collect {|p| [ p.fullName, p.id ] }, { include_blank: false }) %></div>
+
+              <div >Book: 
+              <%= f.select("book_id", Book.all.collect {|p| [ p.title+"- ISBN: "+p.ISBN, p.id ] }, { include_blank: false }) %></div>
+              <%= f.submit "Add"%>
+            </div>
+          <% end %>
+
 
         </td>
         <td>

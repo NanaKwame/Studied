@@ -1,4 +1,6 @@
-<h1>Listing books</h1>
+<h1>Listing Books</h1>
+
+<%= link_to 'New Book', new_book_path , :class => "btn btn-default index-new-button"  %>
 
 <table class="table table-bordered">
   <thead>
@@ -22,6 +24,7 @@
           <%for auth in book.authors%>
             <div class="ele-author inlineb">
               <%=auth.fullName%>
+              <%= image_tag("delete.png", class: "deleteicon btn deletejs", :title => "untag", :data => {:controller => "authors", :id => auth.id})%>
             </div>
             <br>
           <%end%>
@@ -73,4 +76,4 @@
 
 <br>
 
-<%= link_to 'New Book', new_book_path %>
+

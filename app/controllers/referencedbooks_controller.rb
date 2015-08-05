@@ -1,6 +1,6 @@
 class ReferencedbooksController < ApplicationController
   before_action :set_referencedbook, only: [:show, :edit, :update, :destroy]
-
+  before_filter :deny_non_admin, only: [:index, :show]
   respond_to :html
 
   def index
@@ -23,7 +23,7 @@ class ReferencedbooksController < ApplicationController
   def create
     @referencedbook = Referencedbook.new(referencedbook_params)
     @referencedbook.save
-    respond_with(@referencedbook)
+    redirect_to :back
   end
 
   def update
@@ -42,6 +42,6 @@ class ReferencedbooksController < ApplicationController
     end
 
     def referencedbook_params
-      params[:referencedbook]
+      params[:referencedbook].permit(:user_id, :book_id,  :forum_id )
     end
 end

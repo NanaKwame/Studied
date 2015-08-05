@@ -90,7 +90,11 @@
 
 <script type="text/javascript">
   $(".page-notice").fadeOut( 3000, "linear");
+  $( document ).ready(function() {
+      $('select').select2({dropdownAutoWidth : true});
+  });
 </script>
+
 
 <%= yield %>
 

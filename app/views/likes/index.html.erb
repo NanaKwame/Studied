@@ -13,7 +13,7 @@
   <tbody>
     <% @likes.each do |like| %>
       <tr>
-        <td><%= like.user.fullName%></td>
+        <td><%= like.user_id%> - <%=like.user.fullName%></td>
         <td><%= like.liked_type%></td>
         <td>ID: <%=like.liked.id%></td>
         <td>
@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Like', new_like_path %>
+
