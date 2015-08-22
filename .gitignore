@@ -1,4 +1,4 @@
-tmp/cache/*
 tmp/*
 .bundle
 public/system/books/images/*
+tmp/cache/*
