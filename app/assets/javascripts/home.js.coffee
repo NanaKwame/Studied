@@ -3,6 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
+  ### making :contains case insentive ###
+  $.expr[":"].contains = $.expr.createPseudo((arg)  ->
+     (elem) ->
+        $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+  )
+  console.log('made it case insensitive')
   console.log("js ready loaded")
   $(".deletejs").click ->
     controller = $(this).attr("data-controller")
@@ -38,9 +44,15 @@ ready = ->
         $(ele).removeClass("noDisplay")
       else if $(ele).attr("data-status") not in statuses
         $(ele).addClass("noDisplay")
-      
-      
-    
+  
+  ### for search page to search on keypress ###   
+  $(".searchbar").bind 'keyup', (e) ->
+    console.log("something was typed")
+    search_term = $(".searchbar").val()
+    console.log(search_term)
+    $(".catalogue-ele:not(:contains('" + search_term + "'))").hide()
+    $(".catalogue-ele:contains('" + search_term + "')").show()
+
 
 deleteURL = (controller, id)->
   $.ajax
