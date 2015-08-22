@@ -4,15 +4,21 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 ruby '2.2.2'
 
+#For launching rails server
 gem 'puma'
 
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
+
+#gem for postgreSQL
 gem 'pg'
 
-# Use SCSS for stylesheets
+
+# For bootstrap (CSS)
 gem 'bootstrap-sass', '~> 3.2.0'
+# Use SCSS for stylesheets
+# sass-rails helps to interpret scss -> css
 gem 'sass-rails', '~> 4.0.0'
 
 # Use Uglifier as compressor for JavaScript assets
@@ -50,10 +56,23 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# Gem for jQuery-UI for rails
 gem 'jquery-ui-rails'
+
+# Handles login / sign up 
 gem 'devise'
+
+# gem select boxes
 gem 'select2-rails'
+
+# for uploading / handling images
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+
+# for Amazon Web Services (for paperclip)
 gem "aws-sdk"
+
+# Used by paperclip gem (for formatting images)
 gem "rmagick", :require => 'rmagick'
+
+# ? required for paperclip
 gem 'rails_12factor'
